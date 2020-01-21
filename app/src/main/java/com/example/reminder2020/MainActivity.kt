@@ -1,9 +1,9 @@
 package com.example.reminder2020
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.toast
 
 
 class MainActivity : AppCompatActivity() {
@@ -12,8 +12,26 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        testButton.setOnClickListener{
-            toast("Click!")
+        var fabOpened = false
+
+        fab.setOnClickListener{
+            if (!fabOpened) {
+                fabOpened = true
+                fab_map.animate().translationY(-resources.getDimension((R.dimen.standard_66)))
+                fab_time.animate().translationY(-resources.getDimension((R.dimen.standard_116)))
+            } else {
+                fabOpened = false
+                fab_map.animate().translationY(0f)
+                fab_time.animate().translationY(0f)
+            }
+        }
+
+        fab_time.setOnClickListener{
+            startActivity(Intent(applicationContext, TimeActivity::class.java))
+        }
+
+        fab_map.setOnClickListener {
+            startActivity(Intent(applicationContext, MapActivity::class.java))
         }
     }
 }
