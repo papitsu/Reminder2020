@@ -33,5 +33,9 @@ class MainActivity : AppCompatActivity() {
         fab_map.setOnClickListener {
             startActivity(Intent(applicationContext, MapActivity::class.java))
         }
+
+        val data = arrayOf("Oulu", "Helsinki", "Tampere", "Turku")
+        val reminderAdapter = ReminderAdapter(applicationContext, data)
+        list.adapter = reminderAdapter
     }
 }
