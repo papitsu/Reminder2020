@@ -16,6 +16,9 @@ interface ReminderDao {
     @Transaction @Insert
     fun insert(reminder: Reminder)
 
+    @Query("DELETE FROM reminders WHERE uid = :id")
+    fun delete(id: Int)
+
     @Query("SELECT * FROM reminders")
     fun getReminders(): List<Reminder>
 }

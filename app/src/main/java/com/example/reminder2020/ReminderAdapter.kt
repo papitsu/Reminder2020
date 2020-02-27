@@ -20,15 +20,15 @@ class ReminderAdapter(context: Context, private val list: List<Reminder>) : Base
         row.itemMessage.text = list[position].message
 
         if (list[position].time != null) {
-            val sdf = SimpleDateFormat("HH:mm dd.MM.yyyy")
+            val sdf = SimpleDateFormat("HH:mm dd.MM.yyyy", Locale.getDefault())
             sdf.timeZone = TimeZone.getDefault()
 
             val time = list[position].time
-            val readableTime = sdf.format(time)
+            val date = sdf.format(time)
 
-            row.itemTrigger.text = readableTime
-        } else {
-            row.itemTrigger.text = "location"
+            row.itemTrigger.text = date
+        } else if (list[position].location != null) {
+            row.itemTrigger.text = list[position].location
         }
 
         //row.itemTrigger.text = list[position].time.toString()

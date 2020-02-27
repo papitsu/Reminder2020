@@ -18,6 +18,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.activity_map.*
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.toast
 import java.util.*
 import java.util.jar.Manifest
 
@@ -33,11 +34,24 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
         (map_fragment as SupportMapFragment).getMapAsync(this)
         map_create.setOnClickListener {
+
+            val reminderText = reminder_message.text.toString()
+
+            if (reminderText.isEmpty()) {
+                toast("Please provide reminder text")
+                return@setOnClickListener
+            }
+
+            if (selectedLocation==null) {
+                toast("Please select a location on the map")
+                return@setOnClickListener
+            }
+
             val reminder = Reminder(
                 uid = null,
                 time = null,
-                location = "65.059640\n25.466246",
-                message = "test"
+                location = String.format("%.3f;%.3f", selectedLocation.latitude, selectedLocation.longitude),
+                message = reminderText
             )
 
             doAsync {
@@ -92,6 +106,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
                 val marker = addMarker(MarkerOptions().position(location).snippet(title).title(city))
                 marker.showInfoWindow()
 
+                selectedLocation = location
             }
         }
 
