@@ -20,7 +20,7 @@ class ReminderAdapter(context: Context, private val list: List<Reminder>) : Base
         row.itemMessage.text = list[position].message
 
         if (list[position].time != null) {
-            val sdf = SimpleDateFormat("HH:mm dd.MM.yyyy", Locale.getDefault())
+            val sdf = SimpleDateFormat("HH:mm\ndd.MM.yyyy", Locale.getDefault())
             sdf.timeZone = TimeZone.getDefault()
 
             val time = list[position].time
