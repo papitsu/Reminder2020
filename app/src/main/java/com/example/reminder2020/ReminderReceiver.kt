@@ -8,6 +8,7 @@ import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.toast
 
 class ReminderReceiver : BroadcastReceiver() {
+
     override fun onReceive(context: Context, intent: Intent) {
         val uid = intent.getIntExtra("uid", 0)
         val text = intent.getStringExtra("message")
