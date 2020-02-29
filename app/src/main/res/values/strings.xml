@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Reminder2020</string>
+    <string name="reminder_createButton_text">Create</string>
+    <string name="search_hint_text">Search ...</string>
+    <string name="noreminders">No reminders yet</string>
 </resources>

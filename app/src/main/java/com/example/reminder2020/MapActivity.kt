@@ -35,7 +35,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     lateinit var geofencingClient: GeofencingClient
 
     val GEOFENCE_ID = "REMINDER_GEOFENCE_ID"
-    val GEOFENCE_RADIUS = 500
+    val GEOFENCE_RADIUS = 500.0
     val GEOFENCE_EXPIRATION = 180 * 24 * 60 * 60 * 1000 //milliseconds
     val GEOFENCE_DWELL_DELAY = 2 * 60 * 1000 //two minutes in milliseconds
 
@@ -195,8 +195,8 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
                 try {
                     val addressList =
                         geocoder.getFromLocation(location.latitude, location.longitude, 1)
-                    city = addressList.get(0).locality
-                    title = addressList.get(0).getAddressLine(0)
+                    city = addressList[0].locality
+                    title = addressList[0].getAddressLine(0)
                 } catch (e: Exception) {
 
                 }

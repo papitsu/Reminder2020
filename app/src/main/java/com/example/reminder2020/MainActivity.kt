@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
 
         var fabOpened = false
 
-        fab.setOnClickListener{
+        fab.setOnClickListener {
             if (!fabOpened) {
                 fabOpened = true
                 fab_map.animate().translationY(-resources.getDimension((R.dimen.standard_66)))
@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        fab_time.setOnClickListener{
+        fab_time.setOnClickListener {
             startActivity(Intent(applicationContext, TimeActivity::class.java))
         }
 
@@ -53,16 +53,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun refreshList() {
         doAsync {
-            val db = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "reminders").build()
+            val db = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "reminders")
+                .build()
             val reminders = db.reminderDao().getReminders()
             db.close()
             uiThread {
 
-                if (reminders.isNotEmpty()){
+                if (reminders.isNotEmpty()) {
                     val adapter = ReminderAdapter(applicationContext, reminders)
                     list.adapter = adapter
                 } else {
-                    toast("No reminders yet")
+                    toast(getString(R.string.noreminders))
                 }
 
             }
@@ -70,15 +71,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
-        val CHANNEL_ID = "REMINDER_CHANNEL_ID"
-        var NotificationID = 1337
         fun showNotification(context: Context, message: String) {
-            var notificationBuilder = NotificationCompat.Builder(context, CHANNEL_ID)
+            val CHANNEL_ID = "REMINDER_CHANNEL_ID"
+            var notificationId = 1337
+            notificationId += Random(notificationId).nextInt(1, 30)
+
+            val notificationBuilder = NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_notification_important_24px)
                 .setContentTitle(context.getString(R.string.app_name))
                 .setStyle(NotificationCompat.BigTextStyle().bigText(message))
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-            var notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+            val notificationManager =
+                context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -86,12 +91,12 @@ class MainActivity : AppCompatActivity() {
                     CHANNEL_ID,
                     context.getString(R.string.app_name),
                     NotificationManager.IMPORTANCE_DEFAULT
-                ).apply { description = context.getString(R.string.app_name)}
+                ).apply { description = context.getString(R.string.app_name) }
 
                 notificationManager.createNotificationChannel(channel)
             }
-            val notification = NotificationID + Random(NotificationID).nextInt(1,30)
-            notificationManager.notify(notification, notificationBuilder.build())
+
+            notificationManager.notify(notificationId, notificationBuilder.build())
         }
     }
 }

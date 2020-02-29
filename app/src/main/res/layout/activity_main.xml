@@ -17,17 +17,16 @@
         app:layout_constraintVertical_bias="0.383" />
 
 
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:clickable="true"
-        android:src="@drawable/ic_schedule"
         android:tint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_schedule"
         tools:srcCompat="@tools:sample/avatars[1]" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -36,10 +35,10 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:clickable="true"
-        android:src="@drawable/ic_map"
         android:tint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_map"
         tools:srcCompat="@tools:sample/avatars[13]" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -48,10 +47,10 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:clickable="true"
-        android:src="@drawable/ic_add"
         android:tint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_add"
         tools:srcCompat="@tools:sample/avatars[15]" />
 
     <ListView
